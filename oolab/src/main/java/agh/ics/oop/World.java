@@ -7,21 +7,6 @@ public class World
 {
     public static void main(String[] args)
     {
-        // Test metody toString
-        MapDirection direction = MapDirection.EAST;
-        System.out.println(direction);
-
-        // Test metody next
-        System.out.println(direction.next());
-        // Test metody previous
-        System.out.println(direction.previous());
-
-        // Test metody toUnitVector
-        Vector2d unitVector = direction.toUnitVector();
-        System.out.println(unitVector);
-
-
-
 
         System.out.println("System wystartowal");
         MoveDirection[] directions = OptionsParser.parse(args);
@@ -42,16 +27,16 @@ public class World
         for (MoveDirection direction : directions) {
             switch (direction) {
                 case FORWARD:
-                    System.out.println("Zwierzak idzie do przodu");
+                    System.out.println("Zwierzak do przodu");
                     break;
                 case BACKWARD:
-                    System.out.println("Zwierzak idzie do tylu");
+                    System.out.println("Zwierzak do tylu");
                     break;
                 case RIGHT:
-                    System.out.println("Zwierzak skreca w prawo");
+                    System.out.println("Zwierzak w prawo");
                     break;
                 case LEFT:
-                    System.out.println("Zwierzak skreca w lewo");
+                    System.out.println("Zwierzak w lewo");
                     break;
             }
         }

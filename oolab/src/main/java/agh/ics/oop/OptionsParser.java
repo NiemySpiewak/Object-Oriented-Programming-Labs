@@ -6,6 +6,7 @@ public class OptionsParser
 {
     public static MoveDirection[] parse(String[] args) {
         List<MoveDirection> directions = new ArrayList<>();
+
         for (String arg : args) {
             switch (arg) {
                 case "f":
