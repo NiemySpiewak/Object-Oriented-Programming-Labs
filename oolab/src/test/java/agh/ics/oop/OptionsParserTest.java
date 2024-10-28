@@ -35,5 +35,16 @@ class OptionsParserTest {
         assertEquals(MoveDirection.RIGHT, result[2]);
         assertEquals(MoveDirection.LEFT, result[3]);
     }
+    
+    @Test
+    void allWrongLetters(){
+        // Given
+        String[] letters = {"blad", "blad", "blad", "blad", "blad"};
 
+        // When
+        MoveDirection[] result = OptionsParser.parse(letters);
+
+        // Then
+        assertEquals(0, result.length);
+    }
 }
