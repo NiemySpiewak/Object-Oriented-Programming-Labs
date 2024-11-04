@@ -15,27 +15,27 @@ class AnimalTest {
 
 
         //Then
-        assertEquals("[position=(2,2), orientation=Polnoc]", animal.toString());
+        assertEquals("[position=(2,2), orientation=Północ]", animal.toString());
 
         //When
         animal.move(MoveDirection.FORWARD);
         //Then
-        assertEquals("[position=(2,3), orientation=Polnoc]", animal.toString());
+        assertEquals("[position=(2,3), orientation=Północ]", animal.toString());
 
         //When
         animal.move(MoveDirection.BACKWARD);
         //Then
-        assertEquals("[position=(2,2), orientation=Polnoc]", animal.toString());
+        assertEquals("[position=(2,2), orientation=Północ]", animal.toString());
 
         //When
         animal.move(MoveDirection.RIGHT);
         //Then
-        assertEquals("[position=(2,2), orientation=Wschod]", animal.toString());
+        assertEquals("[position=(2,2), orientation=Wschód]", animal.toString());
 
         //When
         animal.move(MoveDirection.LEFT);
         //Then
-        assertEquals("[position=(2,2), orientation=Polnoc]", animal.toString());
+        assertEquals("[position=(2,2), orientation=Północ]", animal.toString());
     }
 
     @Test
@@ -49,7 +49,7 @@ class AnimalTest {
         animal.move(MoveDirection.BACKWARD);
 
         // Then
-        assertEquals("[position=(2,0), orientation=Polnoc]", animal.toString());
+        assertEquals("[position=(2,0), orientation=Północ]", animal.toString());
 
         //When
         animal.move(MoveDirection.FORWARD);
@@ -58,14 +58,14 @@ class AnimalTest {
         animal.move(MoveDirection.FORWARD);
         animal.move(MoveDirection.FORWARD);
         //Then
-        assertEquals("[position=(0,1), orientation=Zachod]", animal.toString());
+        assertEquals("[position=(0,1), orientation=Zachód]", animal.toString());
 
         //When
         animal.move(MoveDirection.LEFT);
         animal.move(MoveDirection.FORWARD);
         animal.move(MoveDirection.FORWARD);
         //Then
-        assertEquals("[position=(0,0), orientation=Poludnie]", animal.toString());
+        assertEquals("[position=(0,0), orientation=Południe]", animal.toString());
 
         //When
         animal.move(MoveDirection.RIGHT);
@@ -76,7 +76,7 @@ class AnimalTest {
         animal.move(MoveDirection.FORWARD);
         animal.move(MoveDirection.FORWARD);
         //Then
-        assertEquals("[position=(0,4), orientation=Polnoc]", animal.toString());
+        assertEquals("[position=(0,4), orientation=Północ]", animal.toString());
 
         //When
         animal.move(MoveDirection.RIGHT);
@@ -86,15 +86,6 @@ class AnimalTest {
         animal.move(MoveDirection.FORWARD);
         animal.move(MoveDirection.FORWARD);
         //Then
-        assertEquals("[position=(4,4), orientation=Wschod]", animal.toString());
+        assertEquals("[position=(4,4), orientation=Wschód]", animal.toString());
     }
-
-    @Test
-    public void InputParsing() {
-        String[] args = {"f", "r", "f", "l", "b"};
-        List<MoveDirection> directions = OptionsParser.parse(args);
-
-        assertEquals(List.of(MoveDirection.FORWARD, MoveDirection.RIGHT, MoveDirection.FORWARD, MoveDirection.LEFT, MoveDirection.BACKWARD), directions);
-    }
-
 }
