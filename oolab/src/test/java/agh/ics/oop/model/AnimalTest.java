@@ -12,80 +12,81 @@ class AnimalTest {
     void isOrientationCorrect() {
         //Given
         Animal animal = new Animal(new Vector2d(2, 2));
-
+        MoveValidator validator = new RectangularMap(10, 10);
 
         //Then
-        assertEquals("[position=(2,2), orientation=Północ]", animal.toString());
+        assertEquals("N", animal.toString());
 
         //When
-        animal.move(MoveDirection.FORWARD);
+        animal.move(MoveDirection.FORWARD, validator);
         //Then
-        assertEquals("[position=(2,3), orientation=Północ]", animal.toString());
+        assertEquals("N", animal.toString());
 
         //When
-        animal.move(MoveDirection.BACKWARD);
+        animal.move(MoveDirection.BACKWARD, validator);
         //Then
-        assertEquals("[position=(2,2), orientation=Północ]", animal.toString());
+        assertEquals("N", animal.toString());
 
         //When
-        animal.move(MoveDirection.RIGHT);
+        animal.move(MoveDirection.RIGHT, validator);
         //Then
-        assertEquals("[position=(2,2), orientation=Wschód]", animal.toString());
+        assertEquals("E", animal.toString());
 
         //When
-        animal.move(MoveDirection.LEFT);
+        animal.move(MoveDirection.LEFT, validator);
         //Then
-        assertEquals("[position=(2,2), orientation=Północ]", animal.toString());
+        assertEquals("N", animal.toString());
     }
 
     @Test
     public void doesntGoOutsideBounds() {
         // Given
         Animal animal = new Animal(new Vector2d(2, 2));
+        MoveValidator validator = new RectangularMap(10, 10);
 
         // When
-        animal.move(MoveDirection.BACKWARD);
-        animal.move(MoveDirection.BACKWARD);
-        animal.move(MoveDirection.BACKWARD);
+        animal.move(MoveDirection.BACKWARD, validator);
+        animal.move(MoveDirection.BACKWARD, validator);
+        animal.move(MoveDirection.BACKWARD, validator);
 
         // Then
-        assertEquals("[position=(2,0), orientation=Północ]", animal.toString());
+        assertEquals("N", animal.toString());
 
         //When
-        animal.move(MoveDirection.FORWARD);
-        animal.move(MoveDirection.LEFT);
-        animal.move(MoveDirection.FORWARD);
-        animal.move(MoveDirection.FORWARD);
-        animal.move(MoveDirection.FORWARD);
+        animal.move(MoveDirection.FORWARD, validator);
+        animal.move(MoveDirection.LEFT, validator);
+        animal.move(MoveDirection.FORWARD, validator);
+        animal.move(MoveDirection.FORWARD, validator);
+        animal.move(MoveDirection.FORWARD, validator);
         //Then
-        assertEquals("[position=(0,1), orientation=Zachód]", animal.toString());
+        assertEquals("W", animal.toString());
 
         //When
-        animal.move(MoveDirection.LEFT);
-        animal.move(MoveDirection.FORWARD);
-        animal.move(MoveDirection.FORWARD);
+        animal.move(MoveDirection.LEFT, validator);
+        animal.move(MoveDirection.FORWARD, validator);
+        animal.move(MoveDirection.FORWARD, validator);
         //Then
-        assertEquals("[position=(0,0), orientation=Południe]", animal.toString());
+        assertEquals("S", animal.toString());
 
         //When
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.FORWARD);
-        animal.move(MoveDirection.FORWARD);
-        animal.move(MoveDirection.FORWARD);
-        animal.move(MoveDirection.FORWARD);
-        animal.move(MoveDirection.FORWARD);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.FORWARD, validator);
+        animal.move(MoveDirection.FORWARD, validator);
+        animal.move(MoveDirection.FORWARD, validator);
+        animal.move(MoveDirection.FORWARD, validator);
+        animal.move(MoveDirection.FORWARD, validator);
         //Then
-        assertEquals("[position=(0,4), orientation=Północ]", animal.toString());
+        assertEquals("N", animal.toString());
 
         //When
-        animal.move(MoveDirection.RIGHT);
-        animal.move(MoveDirection.FORWARD);
-        animal.move(MoveDirection.FORWARD);
-        animal.move(MoveDirection.FORWARD);
-        animal.move(MoveDirection.FORWARD);
-        animal.move(MoveDirection.FORWARD);
+        animal.move(MoveDirection.RIGHT, validator);
+        animal.move(MoveDirection.FORWARD, validator);
+        animal.move(MoveDirection.FORWARD, validator);
+        animal.move(MoveDirection.FORWARD, validator);
+        animal.move(MoveDirection.FORWARD, validator);
+        animal.move(MoveDirection.FORWARD, validator);
         //Then
-        assertEquals("[position=(4,4), orientation=Wschód]", animal.toString());
+        assertEquals("E", animal.toString());
     }
 }

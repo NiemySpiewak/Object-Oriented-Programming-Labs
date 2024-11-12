@@ -14,16 +14,25 @@ public class Animal {
 
     @Override
     public String toString() {
-        return "[position=" + position + ", orientation=" + orientation + "]";
+        return switch (this.orientation) {
+            case NORTH -> "N";
+            case SOUTH -> "S";
+            case WEST -> "W";
+            case EAST -> "E";
+        };
     }
+
     public boolean isAt(Vector2d position){
         return this.position.equals(position);
     }
 
+    public Vector2d getPosition() {
+        return this.position;
+    }
     private static final Vector2d LOWER_BOUND = new Vector2d(0,0);
     private static final Vector2d UPPER_BOUND = new Vector2d(4,4);
 
-    public void move(MoveDirection direction){
+    public Vector2d move(MoveDirection direction, MoveValidator map){
         switch(direction){
             case RIGHT:
                 this.orientation = this.orientation.next();
@@ -33,19 +42,17 @@ public class Animal {
                 break;
             case FORWARD:
                 Vector2d newPosition = this.position.add(this.orientation.toUnitVector());
-                if (isWithinBounds(newPosition)) {
+                if (map.canMoveTo(newPosition)) {
                     this.position = newPosition;
                 }
                 break;
             case BACKWARD:
                 Vector2d newPositionBack = this.position.subtract(this.orientation.toUnitVector());
-                if (isWithinBounds(newPositionBack)) {
+                if (map.canMoveTo(newPositionBack)) {
                     this.position = newPositionBack;
                 }
                 break;
         }
-    }
-    private boolean isWithinBounds(Vector2d position) {
-        return position.follows(LOWER_BOUND) && position.precedes(UPPER_BOUND);
+        return null;
     }
 }
