@@ -19,7 +19,7 @@ public class RectangularMap implements WorldMap {
     @Override
     public boolean place(Animal animal) {
         Vector2d position = animal.getPosition();
-        if (canMoveTo(position) && !isOccupied(position)) {
+        if (canMoveTo(position) ) {
             animals.put(position, animal);
             return true;
         }

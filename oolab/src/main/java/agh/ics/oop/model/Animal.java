@@ -32,7 +32,7 @@ public class Animal {
     private static final Vector2d LOWER_BOUND = new Vector2d(0,0);
     private static final Vector2d UPPER_BOUND = new Vector2d(4,4);
 
-    public Vector2d move(MoveDirection direction, MoveValidator map){
+    public void move(MoveDirection direction, MoveValidator map){
         switch(direction){
             case RIGHT:
                 this.orientation = this.orientation.next();
@@ -52,7 +52,8 @@ public class Animal {
                     this.position = newPositionBack;
                 }
                 break;
+            default:
+                break;
         }
-        return null;
     }
 }

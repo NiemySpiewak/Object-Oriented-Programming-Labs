@@ -12,7 +12,7 @@ class AnimalTest {
     void isOrientationCorrect() {
         //Given
         Animal animal = new Animal(new Vector2d(2, 2));
-        MoveValidator validator = new RectangularMap(10, 10);
+        RectangularMap validator = new RectangularMap(10, 10);
 
         //Then
         assertEquals("N", animal.toString());
@@ -42,7 +42,7 @@ class AnimalTest {
     public void doesntGoOutsideBounds() {
         // Given
         Animal animal = new Animal(new Vector2d(2, 2));
-        MoveValidator validator = new RectangularMap(10, 10);
+        RectangularMap validator = new RectangularMap(10, 10);
 
         // When
         animal.move(MoveDirection.BACKWARD, validator);

@@ -11,8 +11,8 @@ public class World
         System.out.println("System wystartowal");
         List<MoveDirection> directions = List.of(OptionsParser.parse(args));
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
-        MoveValidator validator = new RectangularMap(10, 10);
-        Simulation simulation = new Simulation(positions, directions, validator);
+        RectangularMap map = new RectangularMap(10, 10);
+        Simulation simulation = new Simulation(positions, directions, map);
         simulation.run();
 
         run(directions);
