@@ -120,5 +120,16 @@ public class RectangularMapTest {
         assertEquals(animal1, map.objectAt(new Vector2d(2, 2)));
         assertEquals(animal2, map.objectAt(new Vector2d(2, 3)));
     }
+    @Test
+    public void testGetElements(){
+        // Given
+        WorldMap map = new RectangularMap(10, 5);
+        Animal animal1 = new Animal(new Vector2d(0, 0));
+        Animal animal2 = new Animal( new Vector2d(2, 3));
+        //When and then
+        assertTrue(map.place(animal1));
+        assertTrue(map.place(animal2));
+        assertEquals(2, map.getElements().size());
+    }
 
 }

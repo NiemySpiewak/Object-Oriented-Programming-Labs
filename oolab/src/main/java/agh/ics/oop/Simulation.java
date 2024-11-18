@@ -14,15 +14,19 @@ public class Simulation {
         this.directions = directions;
         this.map = map;
         this.animals = new ArrayList<>();
+
         for(Vector2d position : InitialPosition) {
-            Animal Animal = new Animal(position);
+            Animal animal = new Animal(position);
             if(map.place(new Animal())){
-                this.animals.add(new Animal());
+                this.animals.add(animal);
             }
         }
-        if(map.place(new Animal())){
-            this.animals.add(new Animal());
-        }
+//        if(map.place(new Animal())){
+//            this.animals.add(animal);
+//        }
+    }
+    public List<Animal> getAnimals() {
+        return this.animals ;
     }
     public void run(){
         System.out.println(map);
