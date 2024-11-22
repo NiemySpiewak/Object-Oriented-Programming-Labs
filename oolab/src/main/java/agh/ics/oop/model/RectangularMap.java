@@ -35,12 +35,12 @@ public class RectangularMap extends AbstractWorldMap {
 //        return null;
 //    }
 
-//    @Override
-//    public boolean canMoveTo(Vector2d position) {
-//        return position.follows(lowerLeft) &&
-//                position.precedes(upperRight) &&
-//                !isOccupied(position);
-//    }
+    @Override
+    public boolean canMoveTo(Vector2d position) {
+        return position.follows(lowerLeft) &&
+                position.precedes(upperRight) &&
+                super.canMoveTo(position);
+    }
 
 //    @Override
 //    public String toString() {
