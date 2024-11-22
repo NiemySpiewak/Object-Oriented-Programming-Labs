@@ -1,6 +1,7 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.*;
+import agh.ics.oop.model.IncorrectPositionException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,20 +11,24 @@ public class Simulation {
     List<MoveDirection> directions;
     private final WorldMap map;
 
-    public Simulation(List<Vector2d> InitialPosition,List<MoveDirection> directions, WorldMap map) {
+    public Simulation(List<Vector2d> InitialPosition,List<MoveDirection> directions, WorldMap map)
+    {
         this.directions = directions;
         this.map = map;
         this.animals = new ArrayList<>();
 
         for(Vector2d position : InitialPosition) {
             Animal animal = new Animal(position);
-            if(map.place(new Animal())){
+            try
+            {
+                map.place(animal);
                 this.animals.add(animal);
             }
+            catch (IncorrectPositionException e)
+            {
+                System.out.println(e.getMessage());
+            }
         }
-//        if(map.place(new Animal())){
-//            this.animals.add(animal);
-//        }
     }
     public List<Animal> getAnimals() {
         return this.animals ;

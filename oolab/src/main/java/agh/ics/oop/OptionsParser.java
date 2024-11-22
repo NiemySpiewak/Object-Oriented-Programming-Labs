@@ -22,7 +22,7 @@ public class OptionsParser
                     directions.add(MoveDirection.LEFT);
                     break;
                 default:
-                    break;
+                    throw new IllegalArgumentException(arg + " is not legal move specification");
             }
         }
         return directions.toArray(new MoveDirection[0]);

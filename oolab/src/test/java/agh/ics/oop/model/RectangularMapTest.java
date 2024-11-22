@@ -6,22 +6,21 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RectangularMapTest {
 
     @Test
-    public void testMap() {
+    public void testMap() throws IncorrectPositionException {
         // Given
         WorldMap map = new RectangularMap(10, 5);
         Animal animal = new Animal();
 
         // When
-        boolean placedSuccessfully = map.place(animal);
+        map.place(animal);
         map.move(animal, MoveDirection.FORWARD);
 
         // Then
-        assertTrue(placedSuccessfully);
         assertEquals(new Vector2d(2, 3), animal.getPosition());
     }
 
     @Test
-    public void testCanMoveTo1() {
+    public void testCanMoveTo1() throws IncorrectPositionException {
         // Given
         WorldMap map = new RectangularMap(10, 5);
         Animal animal = new Animal();
@@ -36,7 +35,7 @@ public class RectangularMapTest {
     }
 
     @Test
-    public void testCanMoveTo2() {
+    public void testCanMoveTo2() throws IncorrectPositionException {
         // Given
         WorldMap map = new RectangularMap(10, 5);
         Animal animal1 = new Animal();
@@ -54,7 +53,7 @@ public class RectangularMapTest {
     }
 
     @Test
-    public void testPlace() {
+    public void testPlace() throws IncorrectPositionException {
         // Given
         WorldMap map = new RectangularMap(10, 5);
         Animal animal1 = new Animal();
@@ -63,15 +62,17 @@ public class RectangularMapTest {
         // When
 
         boolean placed1 = map.place(animal1);
-        boolean placed2 = map.place(animal2);
+        Exception exception = assertThrows(IncorrectPositionException.class, () -> {
+            map.place(animal2);
+        });
 
         // Then
         assertTrue(placed1);
-        assertFalse(placed2);  // animal2 nie można umieścić na tej samej pozycji
+        assertEquals("Position (2, 2) is not correct", exception.getMessage());  // animal2 nie można umieścić na tej samej pozycji
     }
 
     @Test
-    public void testMove() {
+    public void testMove() throws IncorrectPositionException {
         // Given
         WorldMap map = new RectangularMap(10, 5);
         Animal animal1 = new Animal();
@@ -89,7 +90,7 @@ public class RectangularMapTest {
     }
 
     @Test
-    public void testIsOccupied() {
+    public void testIsOccupied() throws IncorrectPositionException {
         // Given
         WorldMap map = new RectangularMap(10, 5);
         Animal animal1 = new Animal();
@@ -97,16 +98,18 @@ public class RectangularMapTest {
 
         // When
         map.place(animal1);
-        boolean placed2 = map.place(animal2);
+        Exception exception = assertThrows(IncorrectPositionException.class, () -> {
+            map.place(animal2);
+        });
 
         // Then
-        assertFalse(placed2);  // animal2 nie może być umieszczony, ponieważ pozycja jest już zajęta
+        assertEquals("Position (2, 2) is not correct", exception.getMessage());  // animal2 nie może być umieszczony, ponieważ pozycja jest już zajęta
         assertTrue(map.isOccupied(new Vector2d(2, 2)));
         assertFalse(map.isOccupied(new Vector2d(2, 3)));
     }
 
     @Test
-    public void testObjectAt() {
+    public void testObjectAt() throws IncorrectPositionException {
         // Given
         WorldMap map = new RectangularMap(10, 5);
         Animal animal1 = new Animal();
@@ -121,7 +124,7 @@ public class RectangularMapTest {
         assertEquals(animal2, map.objectAt(new Vector2d(2, 3)));
     }
     @Test
-    public void testGetElements(){
+    public void testGetElements() throws IncorrectPositionException {
         // Given
         WorldMap map = new RectangularMap(10, 5);
         Animal animal1 = new Animal(new Vector2d(0, 0));

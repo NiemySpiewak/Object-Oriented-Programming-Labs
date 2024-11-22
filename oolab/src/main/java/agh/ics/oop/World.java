@@ -15,6 +15,12 @@ public class World
         GrassField map = new GrassField(10);
         List<MoveDirection> directions = List.of(OptionsParser.parse(args));
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
+
+
+        ConsoleMapDisplay consoleDisplay = new ConsoleMapDisplay();
+        map.addObserver(consoleDisplay);
+
+
         Simulation simulation = new Simulation(positions, directions, map);
         simulation.run();
 

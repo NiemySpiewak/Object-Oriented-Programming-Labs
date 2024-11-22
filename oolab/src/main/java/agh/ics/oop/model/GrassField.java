@@ -1,5 +1,4 @@
 package agh.ics.oop.model;
-import agh.ics.oop.model.util.Boundary;
 
 import java.util.*;
 
@@ -32,7 +31,7 @@ public class GrassField extends AbstractWorldMap {
         return grasses.get(position);
     }
 
-    private void updateCorners() {
+    public Boundary getCurrentBounds() {
         Vector2d newLowerLeft = new Vector2d(upperRight.getX(), upperRight.getY());
         Vector2d newUpperRight = new Vector2d(lowerLeft.getX(), lowerLeft.getY());
         for (WorldElement element : getElements()) {
@@ -40,16 +39,9 @@ public class GrassField extends AbstractWorldMap {
             newLowerLeft = newLowerLeft.lowerLeft(position);
             newUpperRight = newUpperRight.upperRight(position);
         }
-        lowerLeft = newLowerLeft;
-        upperRight = newUpperRight;
+        return new Boundary(newLowerLeft, newUpperRight);
     }
 
-
-    @Override
-    public String toString(){
-        updateCorners();
-        return super.toString();
-    }
     @Override
     public List<WorldElement> getElements() {
         List<WorldElement> elements = super.getElements();
