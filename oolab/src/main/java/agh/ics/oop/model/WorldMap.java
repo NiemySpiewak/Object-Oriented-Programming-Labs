@@ -1,5 +1,10 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.util.Boundary;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * The interface responsible for interacting with the map of the world.
  * Assumes that Vector2d and MoveDirection classes are defined.
@@ -22,6 +27,8 @@ public interface WorldMap extends MoveValidator {
      */
     void move(Animal animal, MoveDirection direction);
 
+    List<WorldElement> getElements();
+
     /**
      * Return true if given position on the map is occupied. Should not be
      * confused with canMove since there might be empty positions where the animal
@@ -38,5 +45,7 @@ public interface WorldMap extends MoveValidator {
      * @param position The position of the animal.
      * @return animal or null if the position is not occupied.
      */
-    Animal objectAt(Vector2d position);
+    WorldElement objectAt(Vector2d position);
+
+    Boundary getBoundary();
 }
