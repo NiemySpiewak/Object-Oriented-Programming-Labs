@@ -1,6 +1,5 @@
 package agh.ics.oop.model;
 
-import agh.ics.oop.model.util.Boundary;
 import agh.ics.oop.model.util.MapVisualizer;
 
 import java.util.HashMap;
@@ -13,18 +12,34 @@ public abstract class AbstractWorldMap implements WorldMap {
     protected Vector2d upperRight = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
     protected final MapVisualizer visualizer = new MapVisualizer(this);
 
+
+    private final List<MapChangeListener> observers = new ArrayList<>();
+    public void addObserver(MapChangeListener observer) {
+        observers.add(observer);
+    }
+    public void removeObserver(MapChangeListener observer) {
+        observers.remove(observer);
+    }
+    protected void notifyObservers(String message) {
+        for (MapChangeListener observer : observers) {
+            observer.mapChanged(this, message);
+        }
+    }
+
+
     @Override
     public boolean canMoveTo(Vector2d position) {
         return !(objectAt(position) instanceof Animal);
     }
     @Override
-    public boolean place(Animal animal) {
+    public boolean place(Animal animal) throws IncorrectPositionException {
         Vector2d position = animal.getPosition();
-        if (canMoveTo(position) ) {
-            animals.put(position, animal);
-            return true;
+        if (isOccupied(animal.getPosition())) {
+            throw new IncorrectPositionException(animal.getPosition());
         }
-        return false;
+        animals.put(animal.getPosition(), animal);
+        notifyObservers("Placed at " + position);
+        return true;
     }
 
 
@@ -34,6 +49,7 @@ public abstract class AbstractWorldMap implements WorldMap {
         animal.move(direction, this);
         animals.remove(oldPosition);
         animals.put(animal.getPosition(), animal);
+        notifyObservers("Moved from " + oldPosition + " to " + animal.getPosition());
     }
 
     @Override
@@ -54,11 +70,11 @@ public abstract class AbstractWorldMap implements WorldMap {
 
     @Override
     public String toString() {
-        return visualizer.draw(lowerLeft, upperRight);
+        return visualizer.draw(getCurrentBounds().lowerLeft(),getCurrentBounds().upperRight());
     }
 
     @Override
-    public Boundary getBoundary() {
+    public Boundary getCurrentBounds() {
         return new Boundary(lowerLeft, upperRight);
     }
 }

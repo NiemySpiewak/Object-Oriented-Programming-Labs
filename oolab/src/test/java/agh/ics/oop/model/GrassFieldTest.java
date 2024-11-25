@@ -6,39 +6,37 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GrassFieldTest {
     @Test
-    public void mapWorks() {
+    public void mapWorks() throws IncorrectPositionException {
         // given
         WorldMap map = new GrassField(10);
         Animal animal = new Animal();
 
         // when
-        boolean placed = map.place(animal);
+        map.place(animal);
         map.move(animal, MoveDirection.FORWARD);
 
         // then
-        assertTrue(placed);
         assertEquals(new Vector2d(2, 3), animal.getPosition());
     }
 
     @Test
-    public void canMoveTo1() {
+    public void canMoveTo1() throws IncorrectPositionException {
         // given
         WorldMap map = new GrassField(10);
         Animal animal1 = new Animal();
 
         // when
-        boolean placed = map.place(animal1);
+        map.place(animal1);
         boolean canMoveToEmpty = map.canMoveTo(new Vector2d(2, 3));
         boolean canMoveToOccupied = map.canMoveTo(new Vector2d(2, 2));
 
         // then
-        assertTrue(placed);
         assertTrue(canMoveToEmpty);
         assertFalse(canMoveToOccupied);
     }
 
     @Test
-    public void canMoveTo2() {
+    public void canMoveTo2() throws IncorrectPositionException {
         // given
         WorldMap map = new GrassField(10);
         Animal animal1 = new Animal();
@@ -56,7 +54,7 @@ class GrassFieldTest {
     }
 
     @Test
-    public void placeAnimal() {
+    public void placeAnimal() throws IncorrectPositionException {
         // given
         WorldMap map = new GrassField(10);
         Animal animal1 = new Animal();
@@ -69,7 +67,7 @@ class GrassFieldTest {
     }
 
     @Test
-    public void moveAnimals() {
+    public void moveAnimals() throws IncorrectPositionException {
         // given
         WorldMap map = new GrassField(10);
         Animal animal1 = new Animal();
@@ -89,7 +87,7 @@ class GrassFieldTest {
     }
 
     @Test
-    public void isOccupied() {
+    public void isOccupied() throws IncorrectPositionException {
         // given
         WorldMap map = new GrassField(10);
         Animal animal1 = new Animal();
@@ -103,7 +101,7 @@ class GrassFieldTest {
     }
 
     @Test
-    public void isOccupiedPass() {
+    public void isOccupiedPass() throws IncorrectPositionException {
         // given
         WorldMap map = new GrassField(10);
         Animal animal1 = new Animal();
@@ -119,7 +117,7 @@ class GrassFieldTest {
     }
 
     @Test
-    public void objectAt() {
+    public void objectAt() throws IncorrectPositionException {
         // given
         WorldMap map = new GrassField(10);
         Animal animal1 = new Animal();
@@ -133,7 +131,7 @@ class GrassFieldTest {
     }
 
     @Test
-    public void getElements() {
+    public void getElements() throws IncorrectPositionException {
         // given
         WorldMap map = new GrassField(10);
         Animal animal1 = new Animal();

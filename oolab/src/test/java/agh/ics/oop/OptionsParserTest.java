@@ -7,6 +7,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OptionsParserTest {
     @Test
+    public void testInvalidArgumentThrowsException() {
+        OptionsParser parser = new OptionsParser();
+        String[] invalidArgs = {"f", "x", "r"};
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> parser.parse(invalidArgs));
+        assertEquals("x is not legal move specification", exception.getMessage());
+    }
+
+    @Test
     void CorrectLetters(){
         // Given
         String[] letters = {"f", "b", "r", "l"};
