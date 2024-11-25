@@ -38,6 +38,7 @@ public abstract class AbstractWorldMap implements WorldMap {
             throw new IncorrectPositionException(animal.getPosition());
         }
         animals.put(animal.getPosition(), animal);
+        notifyObservers("Placed at " + position);
         return true;
     }
 
@@ -48,6 +49,7 @@ public abstract class AbstractWorldMap implements WorldMap {
         animal.move(direction, this);
         animals.remove(oldPosition);
         animals.put(animal.getPosition(), animal);
+        notifyObservers("Moved from " + oldPosition + " to " + animal.getPosition());
     }
 
     @Override
