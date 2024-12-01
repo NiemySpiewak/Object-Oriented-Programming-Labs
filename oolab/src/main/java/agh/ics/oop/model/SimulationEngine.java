@@ -32,6 +32,10 @@ public class SimulationEngine {
 
     private void awaitSimulationEnd() {
         try {
+            for(Thread thread : threads) {
+                thread.join();
+            }
+            executorService.shutdown();
             if (!executorService.awaitTermination(10, TimeUnit.SECONDS)) {
                 executorService.shutdownNow();
             }
@@ -44,7 +48,6 @@ public class SimulationEngine {
         for (Simulation simulation : simulations) {
             executorService.submit(simulation);
         }
-
-        executorService.shutdown();
+        awaitSimulationEnd();
     }
 }
