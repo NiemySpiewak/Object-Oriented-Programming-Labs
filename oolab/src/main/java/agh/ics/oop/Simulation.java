@@ -34,13 +34,16 @@ public class Simulation implements Runnable {
         return this.animals ;
     }
     public void run(){
-        //System.out.println(map);
         for(int i=0; i < directions.size(); i++){
             Animal animal = animals.get(i % animals.size());
             MoveDirection InitialPosition = directions.get(i);
-
             map.move(animal, InitialPosition);
-            System.out.println(map);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //System.out.println(map);
         }
     }
 }

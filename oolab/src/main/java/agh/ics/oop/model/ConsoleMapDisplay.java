@@ -10,14 +10,16 @@ public class ConsoleMapDisplay implements MapChangeListener{
     public void mapChanged(WorldMap worldMap, String message)
     {
         updateCount++;
-//        synchronized (System.out) {
-//        System.out.println("Updates counter: " + updateCount);
-//        System.out.println("Notification: " + message);
-//        System.out.println("Mapa ID: " + worldMap.getId());
-//        }
+        synchronized (System.out) {
+            updateCount++;
         System.out.println("Updates counter: " + updateCount);
         System.out.println("Notification: " + message);
         System.out.println("Mapa ID: " + worldMap.getId());
         System.out.println(worldMap);
+        }
+//        System.out.println("Updates counter: " + updateCount);
+//        System.out.println("Notification: " + message);
+//        System.out.println("Mapa ID: " + worldMap.getId());
+//        System.out.println(worldMap);
     }
 }
