@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.presenter.SimulationPresenter;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -48,4 +50,5 @@ public interface WorldMap extends MoveValidator {
     Boundary getCurrentBounds();
 
     UUID getId();
+
 }
